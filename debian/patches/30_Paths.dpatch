@@ -1,0 +1,19 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 30_Paths.dpatch by  <drizzt@>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad keepassx-maemo~/src/src.pro keepassx-maemo/src/src.pro
+--- keepassx-maemo~/src/src.pro	2009-12-15 18:32:05.000000000 +0100
++++ keepassx-maemo/src/src.pro	2009-12-15 18:55:25.293330744 +0100
+@@ -52,7 +52,7 @@
+ 	datalicense.path = $${PREFIX}/share/keepassx
+ 	
+ 	shareapp.files = ../share/applications/*.desktop
+-	shareapp.path = $${PREFIX}/share/applications
++	shareapp.path = $${PREFIX}/share/applications/hildon
+ 	shararemime.files = ../share/mime/packages/*.xml
+ 	shararemime.path = $${PREFIX}/share/mime/packages
+ 	sharemimelnk.files = ../share/mimelnk/application/*.desktop
