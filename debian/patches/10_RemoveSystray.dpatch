@@ -1,0 +1,157 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## RemoveSystray.dpatch by  <drizzt@>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad keepassx-0.4.1~/src/main.cpp keepassx-0.4.1/src/main.cpp
+--- keepassx-0.4.1~/src/main.cpp	2009-09-03 18:53:44.000000000 +0200
++++ keepassx-0.4.1/src/main.cpp	2009-12-15 17:17:27.222405495 +0100
+@@ -56,6 +56,13 @@
+ #else
+ 	QApplication* app = new QApplication(argc,argv);
+ #endif
++
++#ifdef Q_WS_HILDON
++	QFont font = app->font();
++	font.setPointSize( font.pointSize()-4 );
++	app->setFont( font );
++#endif
++	
+ 	EventListener* eventListener = new EventListener();
+ 	app->installEventFilter(eventListener);
+ 	
+diff -urNad keepassx-0.4.1~/src/mainwindow.cpp keepassx-0.4.1/src/mainwindow.cpp
+--- keepassx-0.4.1~/src/mainwindow.cpp	2009-09-14 10:59:05.000000000 +0200
++++ keepassx-0.4.1/src/mainwindow.cpp	2009-12-15 17:17:27.222405495 +0100
+@@ -72,7 +72,9 @@
+ 		restoreGeometry(windowGeo);
+ 	VSplitter->restoreState(config->vSplitterPos());
+ 	HSplitter->restoreState(config->hSplitterPos());
++#ifndef	Q_WS_HILDON
+ 	SysTray=new QSystemTrayIcon(this);
++#endif
+ 	setupToolbar();
+ 	setupIcons();
+ 	setStateFileOpen(false);
+@@ -207,7 +209,9 @@
+ 	connect(EntryView, SIGNAL(viewModeChanged(bool)), SLOT(loadColumnVisibility()));
+ 	connect(EntryView, SIGNAL(viewModeChanged(bool)), ViewColumnsGroupAction, SLOT(setVisible(bool)));
+ 
++#ifndef Q_WS_HILDON
+ 	connect(SysTray,SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this,SLOT(OnSysTrayActivated(QSystemTrayIcon::ActivationReason)));
++#endif
+ 	connect(DetailView,SIGNAL(anchorClicked(const QUrl&)),this,SLOT(OnDetailViewUrlClicked(const QUrl&)));
+ 	connect(WorkspaceLockedWidget.Button_Unlock,SIGNAL(clicked()),this,SLOT(OnUnLockWorkspace()));
+ 	connect(WorkspaceLockedWidget.Button_CloseDatabase,SIGNAL(clicked()),this,SLOT(OnLockClose()));
+@@ -278,9 +282,11 @@
+ 	AddThisAsBookmarkAction->setIcon(getIcon("bookmark_this"));
+ 	AddBookmarkAction->setIcon(getIcon("bookmark_add"));
+ 	ManageBookmarksAction->setIcon(getIcon("bookmark"));
++#ifndef Q_WS_HILDON
+ 	SysTray->setIcon(getIcon("keepassx"));
+ 	if(config->showSysTrayIcon())
+ 		SysTray->show();
++#endif
+ }
+ 
+ void KeepassMainWindow::setupMenus(){
+@@ -327,9 +333,11 @@
+ 	SysTrayMenu->addAction(FileUnLockWorkspaceAction);
+ 	SysTrayMenu->addSeparator();
+ 	SysTrayMenu->addAction(FileExitAction);
++#ifndef Q_WS_HILDON
+ 	SysTray->setContextMenu(SysTrayMenu);
+ 	updateTrayTooltip();
+-
++#endif
++	
+ 	#define _add_import(name){\
+ 	QAction* import=new QAction(this);\
+ 	import->setData(qVariantFromValue(dynamic_cast<QObject*>(&name)));\
+@@ -1082,7 +1090,9 @@
+ 		config->setHSplitterPos(HSplitter->saveState());
+ 	config->setShowStatusbar(statusBar()->isVisible());
+ 	
++#ifndef Q_WS_HILDON
+ 	delete SysTray;
++#endif
+ 	QMainWindow::closeEvent(e);
+ 	QApplication::quit();
+ }
+@@ -1133,7 +1143,9 @@
+ 	}
+ 	
+ 	EntryView->setAlternatingRowColors(config->alternatingRowColors());
++#ifndef Q_WS_HILDON
+ 	SysTray->setVisible(config->showSysTrayIcon());
++#endif
+ 	menuBookmarks->menuAction()->setVisible(config->featureBookmarks());
+ #ifndef Q_WS_MAC
+ 	if (config->alwaysOnTop() != oldAlwaysOnTop) {
+@@ -1225,6 +1237,7 @@
+ 	toolBar->setIconSize(QSize(28,28));
+ }
+ 
++#ifndef Q_WS_HILDON
+ void KeepassMainWindow::OnSysTrayActivated(QSystemTrayIcon::ActivationReason reason){
+ 	if(reason!=QSystemTrayIcon::Context){
+ 		if (isVisible()){
+@@ -1243,6 +1256,7 @@
+ 		}
+ 	}
+ }
++#endif
+ 
+ void KeepassMainWindow::restoreWindow(){
+ 	showNormal();
+@@ -1344,7 +1358,9 @@
+ 	NormalCentralWidget->setParent(NULL);
+ 	setCentralWidget(LockedCentralWidget);
+ 	LockedCentralWidget->setVisible(true);
++#ifndef Q_WS_HILDON
+ 	SysTray->setIcon(getIcon("keepassx_locked"));
++#endif
+ 	FileUnLockWorkspaceAction->setText(tr("Un&lock Workspace"));
+ 	IsLocked=true;
+ 	updateTrayTooltip();
+@@ -1359,7 +1375,9 @@
+ 	LockedCentralWidget->setParent(NULL);
+ 	setCentralWidget(NormalCentralWidget);
+ 	NormalCentralWidget->setVisible(true);
++#ifndef Q_WS_HILDON
+ 	SysTray->setIcon(getIcon("keepassx"));
++#endif
+ 	FileUnLockWorkspaceAction->setText(tr("&Lock Workspace"));
+ 	IsLocked=false;
+ 	updateTrayTooltip();
+@@ -1481,6 +1499,7 @@
+ }
+ 
+ void KeepassMainWindow::updateTrayTooltip() {
++#ifndef Q_WS_HILDON
+ 	if (!IsLocked && !FileOpen)
+ 		SysTray->setToolTip(QString("%1 - %2").arg(APP_DISPLAY_NAME, APP_SHORT_FUNC));
+ 	else {
+@@ -1490,6 +1509,7 @@
+ 			tooltip.append( QString(" (%1)").arg(tr("locked")) );
+ 		SysTray->setToolTip(tooltip);
+ 	}
++#endif
+ }
+ 
+ void KeepassMainWindow::updateCurrentFile(const QString& filePath) {
+diff -urNad keepassx-0.4.1~/src/mainwindow.h keepassx-0.4.1/src/mainwindow.h
+--- keepassx-0.4.1~/src/mainwindow.h	2009-12-15 16:55:18.000000000 +0100
++++ keepassx-0.4.1/src/mainwindow.h	2009-12-15 17:17:27.232398814 +0100
+@@ -131,7 +131,9 @@
+ 		QLabel* StatusBarGeneral;
+ 		//QLabel* StatusBarSelection;
+ 		QToolBar* toolBar;
++#ifndef Q_WS_HILDON
+ 		QSystemTrayIcon* SysTray;
++#endif
+ 		QAction* ViewShowToolbarAction;
+ 		QMenu* SysTrayMenu;
+ 		//QAssistantClient* HelpBrowser; //TODO HelpBrowser

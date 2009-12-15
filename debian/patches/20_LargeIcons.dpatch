@@ -1,0 +1,19 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 20_LargeIcons.dpatch by  <drizzt@>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad keepassx-0.4.1~/src/KpxConfig.h keepassx-0.4.1/src/KpxConfig.h
+--- keepassx-0.4.1~/src/KpxConfig.h	2009-12-15 17:17:21.000000000 +0100
++++ keepassx-0.4.1/src/KpxConfig.h	2009-12-15 17:37:33.632426586 +0100
+@@ -99,7 +99,7 @@
+ 	bool showStatusbar(){return settings.value("UI/ShowStatusbar",true).toBool();}
+ 	bool showSysTrayIcon(){return settings.value("Options/ShowSysTrayIcon",false).toBool();}
+ 	bool showToolbar(){return settings.value("UI/ShowToolbar",true).toBool();}
+-	int toolbarIconSize(){return settings.value("UI/ToolbarIconSize",16).toInt();}
++	int toolbarIconSize(){return settings.value("UI/ToolbarIconSize",28).toInt();}
+ 	QString urlCmd(){return settings.value("Options/UrlCmd").toString();}
+ 	bool urlCmdDef(){return settings.value("Options/UrlCmdDef",true).toBool();}
+ 	QByteArray vSplitterPos(){return settings.value("UI/VSplitterPos").toByteArray();}

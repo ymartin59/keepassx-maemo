@@ -1,0 +1,61 @@
+Source: keepassx
+Section: user/tools
+Priority: optional
+Maintainer: Timothy Redaelli <timothy@redaelli.eu>
+Maintainer: Timothy Redaelli <timothy@redaelli.eu>
+Build-Depends: debhelper (>= 5.0.0), libqt4-dev, libpng12-dev, libxtst-dev
+Standards-Version: 3.7.2
+
+Package: keepassx
+Architecture: any
+Depends: ${shlibs:Depends}
+XB-Maemo-Icon-26:
+ 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
+ SUVORK5CYII=
+Description: Cross Platform Password Manager
+ KeePassX is a free/open-source password manager or safe which helps you
+ to manage your passwords in a secure way. You can put all your
+ passwords in one database, which is locked with one master key or a
+ key-disk. So you only have to remember one single master password or
+ insert the key-disk to unlock the whole database. The databases are
+ encrypted using the algorithms AES or Twofish.
+ .
+  Homepage: http://keepassx.sourceforge.net
+  Keepass for maemo homepage: http://qt4.garage.maemo.org
