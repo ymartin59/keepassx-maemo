@@ -1,9 +1,9 @@
 Source: keepassx
-Section: user/tools
+Section: user/utilities
 Priority: optional
 Maintainer: Timothy Redaelli <timothy@redaelli.eu>
 Maintainer: Timothy Redaelli <timothy@redaelli.eu>
-Build-Depends: debhelper (>= 5.0.0), libqt4-dev, libpng12-dev, libxtst-dev
+Build-Depends: debhelper (>= 5.0.0), libqt4-dev, libpng12-dev, libxtst-dev, libxi-dev
 Standards-Version: 3.7.2
 
 Package: keepassx
