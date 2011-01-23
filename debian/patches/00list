@@ -1,3 +1,6 @@
 10_RemoveSystray.dpatch
 20_LargeIcons.dpatch
 30_Paths.dpatch
+40_LessActions.dpatch
+50_DesktopFile.dpatch
+60_ScrollAreaInDialogs.dpatch

@@ -1,3 +1,13 @@
+keepassx (0.4.3-3maemo) unstable; urgency=low
+
+  * Disable menus to improve usability
+  * Database creation is no longer possible
+  * Group management is no longer possible
+  * Autotype compilation switch turned off, feature does not work on Maemo5
+  * Add scrollable viewports for edit-entry, password-generation and settings dialogs.
+
+ -- Yves Martin <ymartin59@free.fr>  Sun, 23 Jun 2011 18:39:00 +0100
+
 keepassx (0.4.3-1maemo) unstable; urgency=low
 
   * Upgrade to 0.4.3

@@ -1,0 +1,19 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 50_DesktopFile.dpatch by  <yma@>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad keepassx-0.4.3~/share/applications/keepassx.desktop keepassx-0.4.3/share/applications/keepassx.desktop
+--- keepassx-0.4.3~/share/applications/keepassx.desktop	2011-01-04 19:00:51.000000000 +0100
++++ keepassx-0.4.3/share/applications/keepassx.desktop	2011-01-04 19:01:42.000000000 +0100
+@@ -4,7 +4,7 @@
+ GenericName[de]=Passwortverwaltung
+ GenericName[es]=Gestor de contraseñas multiplataforma
+ GenericName[fr]=Gestionnaire de mot de passe
+-Exec=keepassx %f
++Exec=keepassx
+ Icon=keepassx
+ Comment=Cross Platform Password Manager
+ Comment[de]=Passwortverwaltung

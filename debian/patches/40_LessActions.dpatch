@@ -1,0 +1,113 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 40_LessActions.dpatch by  <yma@>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad keepassx-0.4.3~/src/forms/MainWindow.ui keepassx-0.4.3/src/forms/MainWindow.ui
+--- keepassx-0.4.3~/src/forms/MainWindow.ui	2010-12-29 23:01:24.000000000 +0100
++++ keepassx-0.4.3/src/forms/MainWindow.ui	2011-01-01 12:45:40.000000000 +0100
+@@ -35,7 +35,7 @@
+         </sizepolicy>
+        </property>
+        <property name="acceptDrops">
+-        <bool>true</bool>
++        <bool>false</bool>
+        </property>
+        <property name="showDropIndicator" stdset="0">
+         <bool>true</bool>
+diff -urNad keepassx-0.4.3~/src/mainwindow.cpp keepassx-0.4.3/src/mainwindow.cpp
+--- keepassx-0.4.3~/src/mainwindow.cpp	2011-01-01 12:42:43.000000000 +0100
++++ keepassx-0.4.3/src/mainwindow.cpp	2011-01-01 12:45:40.000000000 +0100
+@@ -95,6 +95,9 @@
+ 	WorkspaceLockedWidget.setupUi(LockedCentralWidget);
+ 	LockedCentralWidget->setVisible(false);
+ 
++        // #ifdef Q_WS_MAEMO_5 #endif
++        mobileHideMenus(false);
++
+ 	setupConnections();
+ 	connect(qApp, SIGNAL(commitDataRequest(QSessionManager&)), SLOT(OnShutdown(QSessionManager&)));
+ 	
+@@ -217,6 +220,69 @@
+ 	connect(WorkspaceLockedWidget.Button_CloseDatabase,SIGNAL(clicked()),this,SLOT(OnLockClose()));
+ }
+ 
++void KeepassMainWindow::mobileHideMenus(bool enable){
++
++menuExport->menuAction()->setVisible(enable);
++menuImport->menuAction()->setVisible(enable);
++ViewMenu->menuAction()->setVisible(enable);
++
++FileNewAction->setVisible(enable);
++FileSettingsAction->setVisible(enable);
++FileChangeKeyAction->setVisible(enable);
++FileSaveAsAction->setVisible(enable);
++FileCloseAction->setVisible(enable);
++FileChangeKeyAction->setVisible(enable);
++FileUnLockWorkspaceAction->setVisible(enable);
++
++EditCloneEntryAction->setVisible(enable);
++EditGroupSearchAction->setVisible(enable);
++ViewHideUsernamesAction->setVisible(enable);
++ViewHidePasswordsAction->setVisible(enable);
++ViewColumnsTitleAction->setVisible(enable);
++EditSaveAttachmentAction->setVisible(enable);
++
++  EditNewGroupAction->setVisible(enable);
++  ViewShowToolbarAction->setVisible(enable);
++  ViewShowEntryDetailsAction->setVisible(enable);
++  ViewHidePasswordsAction->setVisible(enable);
++  ViewHideUsernamesAction->setVisible(enable);
++
++  menuBookmarks->menuAction()->setVisible(enable);
++  AddBookmarkAction->setVisible(enable);
++  AddThisAsBookmarkAction->setVisible(enable);
++  ManageBookmarksAction->setVisible(enable);
++
++  menuTool_Button_Sizes->menuAction()->setVisible(enable);
++  ViewToolButtonSize16Action->setVisible(enable);
++  ViewToolButtonSize22Action->setVisible(enable);
++  ViewToolButtonSize28Action->setVisible(enable);
++  ViewShowStatusbarAction->setVisible(enable);
++
++  menuColumns->menuAction()->setVisible(enable);
++	ViewColumnsTitleAction->setVisible(enable);
++	ViewColumnsUsernameAction->setVisible(enable);
++	ViewColumnsUrlAction->setVisible(enable);
++	ViewColumnsPasswordAction->setVisible(enable);
++	ViewColumnsCommentAction->setVisible(enable);
++	ViewColumnsExpireAction->setVisible(enable);
++	ViewColumnsCreationAction->setVisible(enable);
++	ViewColumnsLastChangeAction->setVisible(enable);
++	ViewColumnsLastAccessAction->setVisible(enable);
++	ViewColumnsAttachmentAction->setVisible(enable);
++	ViewColumnsGroupAction->setVisible(enable);
++
++menuGroups->menuAction()->setVisible(enable);
++EditNewGroupAction->setVisible(enable);
++EditNewSubgroupAction->setVisible(enable);
++EditEditGroupAction->setVisible(enable);
++EditDeleteGroupAction->setVisible(enable);
++EditGroupSortAction->setVisible(enable);
++
++        menuHelp->menuAction()->setVisible(enable);
++  HelpHandbookAction->setVisible(enable);
++  HelpAboutAction->setVisible(enable);
++}
++
+ void KeepassMainWindow::setupToolbar(){
+ 	toolBar=new QToolBar(this);
+ 	toolBar->setMovable(false);
+diff -urNad keepassx-0.4.3~/src/mainwindow.h keepassx-0.4.3/src/mainwindow.h
+--- keepassx-0.4.3~/src/mainwindow.h	2011-01-01 12:42:43.000000000 +0100
++++ keepassx-0.4.3/src/mainwindow.h	2011-01-01 12:45:40.000000000 +0100
+@@ -107,6 +107,7 @@
+ 		inline void setupToolbar();
+ 		inline void setupIcons();
+ 		inline void setupConnections();
++		inline void mobileHideMenus(bool);
+ 		inline void setupMenus();
+ 		void setStateFileOpen(bool);
+ 		void setStateFileModified(bool);
