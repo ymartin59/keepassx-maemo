@@ -78,9 +78,7 @@ class KeepassMainWindow : public QMainWindow, private Ui_MainWindow{
 		//void OnItemCollaped(QTreeWidgetItem*);
 		void OnShowSearchResults();
 		void OnEntryChanged(SelectionState);
-#ifndef Q_WS_HILDON
 		void OnSysTrayActivated(QSystemTrayIcon::ActivationReason);
-#endif
 		void restoreWindow();
 		void OnImport(QAction*);
 		void OnExport(QAction*);
@@ -138,6 +136,7 @@ class KeepassMainWindow : public QMainWindow, private Ui_MainWindow{
 		QWidget* NormalCentralWidget;
 		QWidget* LockedCentralWidget;
 		Ui_WorkspaceLockedWidget WorkspaceLockedWidget;
+		bool ShutingDown;
 		bool InUnLock;
 		QList<int> lockGroup;
 		QDialog* unlockDlg;
