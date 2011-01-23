@@ -1,13 +1,13 @@
 #! /bin/sh /usr/share/dpatch/dpatch-run
-## 30_Paths.dpatch by  <drizzt@>
+## 30_Paths.dpatch by  <yma@>
 ##
 ## All lines beginning with `## DP:' are a description of the patch.
 ## DP: No description.
 
 @DPATCH@
-diff -urNad keepassx-maemo~/src/src.pro keepassx-maemo/src/src.pro
---- keepassx-maemo~/src/src.pro	2009-12-15 18:32:05.000000000 +0100
-+++ keepassx-maemo/src/src.pro	2009-12-15 18:55:25.293330744 +0100
+diff -urNad keepassx-0.4.3~/src/src.pro keepassx-0.4.3/src/src.pro
+--- keepassx-0.4.3~/src/src.pro	2010-12-30 00:36:17.000000000 +0100
++++ keepassx-0.4.3/src/src.pro	2010-12-30 00:40:16.000000000 +0100
 @@ -52,7 +52,7 @@
  	datalicense.path = $${PREFIX}/share/keepassx
  	

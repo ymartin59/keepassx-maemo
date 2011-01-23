@@ -1,0 +1,7 @@
+Makefile
+src/Makefile
+build/
+bin/
+debian/patched/
+debian/keepassx/
+build-stamp

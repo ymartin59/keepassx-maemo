@@ -1,3 +1,9 @@
+keepassx (0.4.3-1maemo) unstable; urgency=low
+
+  * Upgrade to 0.4.3
+
+ -- Yves Martin <ymartin59@free.fr>  Wed, 29 Dec 2010 19:35:00 +0100
+
 keepassx (0.4.1) unstable; urgency=low
 
   * Bumped to 0.4.1

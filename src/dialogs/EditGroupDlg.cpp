@@ -25,45 +25,48 @@
 CEditGroupDialog::CEditGroupDialog(IDatabase* database,IGroupHandle* Handle,QWidget* parent, Qt::WFlags fl)
 : QDialog(parent,fl)
 {
-	setupUi(this);
-	db=database;
-	handle=Handle;
-	group=new CGroup();
-	group->Title=handle->title();
-	group->Image=handle->image();
-	connect( ButtonBox, SIGNAL( accepted() ), this, SLOT( OnOK() ) );
-	connect( ButtonBox, SIGNAL( rejected() ), this, SLOT( OnCancel() ) );
-	connect( Button_Icon, SIGNAL( clicked() ), this, SLOT( OnIconDlg() ));
-	adjustSize();
-	setMaximumSize(size());
-	setMinimumSize(size());
+	db = database;
+	handle = Handle;
+	group = new CGroup();
+	group->Title = handle->title();
+	group->Image = handle->image();
+	
+	init();
 }
 
 
 CEditGroupDialog::CEditGroupDialog(IDatabase* database,CGroup* Group,QWidget* parent, Qt::WFlags fl)
 	: QDialog(parent,fl)
 {
-	setupUi(this);
-	db=database;
-	group=Group;
-	handle=NULL;
-	connect( ButtonBox, SIGNAL( accepted() ), this, SLOT( OnOK() ) );
-	connect( ButtonBox, SIGNAL( rejected() ), this, SLOT( OnCancel() ) );
-	connect( Button_Icon, SIGNAL( clicked() ), this, SLOT( OnIconDlg() ));
+	db = database;
+	handle = NULL;
+	group = Group;
+	
+	init();
 }
 
 CEditGroupDialog::~CEditGroupDialog(){
 }
 
-void CEditGroupDialog::showEvent(QShowEvent *event){
-	if(event->spontaneous()==false){
-		EditTitle->setText(group->Title);
-		for(int i=0;i<db->numIcons();i++){
-			ComboIconPicker->insertItem(i,db->icon(i),"");
-		}
-		ComboIconPicker->setCurrentIndex(group->Image);
+void CEditGroupDialog::init() {
+	setupUi(this);
+	
+	connect( ButtonBox, SIGNAL( accepted() ), this, SLOT( OnOK() ) );
+	connect( ButtonBox, SIGNAL( rejected() ), this, SLOT( OnCancel() ) );
+	connect( Button_Icon, SIGNAL( clicked() ), this, SLOT( OnIconDlg() ));
+	
+	EditTitle->setText(group->Title);
+	
+	for(int i=0;i<db->numIcons();i++){
+		ComboIconPicker->insertItem(i,db->icon(i),"");
 	}
+	ComboIconPicker->setCurrentIndex(group->Image);
+	
+	adjustSize();
+	setMaximumSize(size());
+	setMinimumSize(size());
 }
+
 
 void CEditGroupDialog::OnOK()
 {

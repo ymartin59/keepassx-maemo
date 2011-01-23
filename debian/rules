@@ -18,7 +18,7 @@ build: patch build-stamp
 build-stamp: 
 	dh_testdir
 	#/opt/qt4-maemo5/bin/
-	qmake-qt4 PREFIX=/usr QMAKE_CFLAGS_DEBUG="$(CFLAGS)" QMAKE_CXXFLAGS_DEBUG="$(CFLAGS)" DEBUG=1
+	qmake-qt4 PREFIX=/usr QMAKE_CFLAGS_DEBUG="$(CFLAGS)" QMAKE_CXXFLAGS_DEBUG="$(CFLAGS)" DEBUG=1 AUTOTYPE=0
 	$(MAKE)
 	touch build-stamp
 
