@@ -1,0 +1,3 @@
+version=3
+opts=pgpsigurlmangle=s/$/.sig/ \
+  https://www.keepassx.org/releases/([\d\.]+)/keepassx-([\d\.]+).tar.gz
