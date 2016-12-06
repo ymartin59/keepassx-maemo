@@ -1,17 +1,13 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
 
-include /usr/share/dpkg/architecture.mk
+#include /usr/share/dpkg/architecture.mk
 
 %:
-	dh $@ --parallel
+	dh $@
 
 override_dh_auto_configure:
-	dh_auto_configure -- -DWITH_GUI_TESTS=ON -DWITH_CXX11=ON
-
-override_dh_auto_test:
-	dh_auto_test -- ARGS+="-E testgui"
-	xvfb-run -a --server-args="-screen 0 800x600x24" dh_auto_test -- ARGS+="-R testgui"
+	dh_auto_configure -- -DWITH_TESTS=OFF -DWITH_GUI_TESTS=OFF -DWITH_CXX11=OFF
 
 override_dh_makeshlibs:
 	# keepassx only ships plugins

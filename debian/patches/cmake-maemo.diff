@@ -1,0 +1,31 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -21,7 +21,7 @@ endif()
+ 
+ project(KeePassX)
+ 
+-cmake_minimum_required(VERSION 2.6.4)
++cmake_minimum_required(VERSION 2.6.3)
+ 
+ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+ 
+@@ -162,19 +162,6 @@ endif()
+ 
+ find_package(ZLIB REQUIRED)
+ 
+-check_cxx_source_compiles("
+-  #include <zlib.h>
+-
+-  #if !defined(ZLIB_VERNUM) || (ZLIB_VERNUM < 0x1200)
+-      #error zlib 1.2.x or higher is required to use the gzip format
+-  #endif
+-
+-  int main() { return 0; }" ZLIB_SUPPORTS_GZIP)
+-
+-if(NOT ZLIB_SUPPORTS_GZIP)
+-  message(FATAL_ERROR "zlib 1.2.x or higher is required to use the gzip format")
+-endif()
+-
+ if(UNIX)
+   check_cxx_source_compiles("#include <sys/prctl.h>
+     int main() { prctl(PR_SET_DUMPABLE, 0); return 0; }"

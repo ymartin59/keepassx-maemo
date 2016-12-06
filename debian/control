@@ -4,14 +4,12 @@ Priority: optional
 Maintainer: Reinhard Tartler <siretart@tauware.de>
 Uploaders: David Valot <ptitdav69@gmail.com>,
            Felix Geyer <fgeyer@debian.org>
-Build-Depends: debhelper (>= 9),
+Build-Depends: debhelper (>= 7),
                cmake,
                libqt4-dev,
-               libgcrypt20-dev,
+               libgcrypt11-dev,
                zlib1g-dev,
-               libxtst-dev,
-               xvfb,
-               xauth
+               libxtst-dev
 Standards-Version: 3.9.6
 Homepage: https://www.keepassx.org/
 Vcs-Git: https://anonscm.debian.org/git/collab-maint/keepassx.git

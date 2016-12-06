@@ -1,2 +1,5 @@
-CMakeLists.txt.*
-build/
+obj-*
+debian/files
+debian/keepassx/
+debian/keepassx.*
+.pc
